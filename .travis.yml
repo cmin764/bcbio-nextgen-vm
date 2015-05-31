@@ -2,6 +2,25 @@
 language: python
 python: 2.7
 
+before_install:
+  # Update the system.
+  - sudo apt-get update -y
+  # Installing required packages.
+  - sudo apt-get install -y git screen vim
+  - sudo apt-get install -y build-essential python-dev python-pip
+  # Installing requirements for openssl.
+  - sudo apt-get install -y libssl-dev libffi-dev
+  # Installing requirements for pycurl.
+  - sudo apt-get install -y libcurl4-openssl-dev
+  # Installing requirements for lxml.
+  - sudo apt-get install -y libxml2-dev libxslt1-dev
+  # Installing requirements for matplotlib.
+  - sudo apt-get install -y libxft-dev libpng-dev libfreetype6-dev
+  # Installing requirements for scipy.
+  - sudo apt-get install -y libblas-dev liblapack-dev libblas3gf gfortran
+  # Installing azure client.
+  - sudo apt-get install -y npm
+
 # command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
 install:
   - pip install tox
