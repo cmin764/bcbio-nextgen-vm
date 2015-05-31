@@ -19,4 +19,3 @@ scipy
 matplotlib
 paramiko
 google-api-python-client
-bcbio-nextgen
