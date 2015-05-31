@@ -3,34 +3,43 @@ language: python
 python: 2.7
 
 before_install:
-  # Update the system.
-  - sudo apt-get update -y
-  # Installing required packages.
-  - sudo apt-get install -y git screen vim
-  - sudo apt-get install -y build-essential python-dev python-pip
-  # Installing requirements for openssl.
-  - sudo apt-get install -y libssl-dev libffi-dev
-  # Installing requirements for pycurl.
-  - sudo apt-get install -y libcurl4-openssl-dev
-  # Installing requirements for lxml.
-  - sudo apt-get install -y libxml2-dev libxslt1-dev
-  # Installing requirements for matplotlib.
-  - sudo apt-get install -y libxft-dev libpng-dev libfreetype6-dev
-  # Installing requirements for scipy.
-  - sudo apt-get install -y liblapack-dev gfortran
-  - sudo apt-get install -y libgmp-dev libmpfr-dev
-  - sudo apt-get install -y libblas-dev libblas3gf
-  # Installing requirements for matplotlib
-  - sudo apt-get install -y inkscape libav-tools gdb mencoder dvipng
-  - sudo apt-get install -y texlive-latex-base texlive-latex-extra
-  - sudo apt-get install -y texlive-fonts-recommended texlive-latex-recommended
-  - sudo apt-get install -y graphviz
-  # Installing azure client.
-  - sudo apt-get install -y npm
+  - echo "Update the system."
+  - sudo apt-get update -qqy
+  - echo "Installing required packages."
+  - sudo apt-get install -qqy git screen vim
+  - sudo apt-get install -qqy build-essential python-dev python-pip
+  - echo "Installing requirements for openssl."
+  - sudo apt-get install -qqy libssl-dev libffi-dev
+  - echo "Installing requirements for pycurl."
+  - sudo apt-get install -qqy libcurl4-openssl-dev
+  - echo "Installing requirements for lxml."
+  - sudo apt-get install -qqy libxml2-dev libxslt1-dev
+  - echo "Installing requirements for matplotlib."
+  - sudo apt-get install -qqy libxft-dev libpng-dev libfreetype6-dev
+  - echo "Installing requirements for scipy."
+  - sudo apt-get install -qqy liblapack-dev gfortran
+  - sudo apt-get install -qqy libgmp-dev libmpfr-dev
+  - sudo apt-get install -qqy libblas-dev libblas3gf
+  - echo "Installing requirements for matplotlib"
+  - sudo apt-get install -qqy inkscape libav-tools gdb mencoder dvipng
+  - sudo apt-get install -qqy texlive-fonts-recommended texlive-latex-recommended
+  - sudo apt-get install -qqy graphviz
+  - echo "Installing requirements for pysam"
+  - sudo apt-get install -qqy gcc g++ zlib1g-dev libbz2-dev libpng12-dev
+  - sudo apt-get install -qqy libatlas-dev libpq-dev r-base-dev libreadline-dev
+  - sudo apt-get install -qqy libmysqlclient-dev libboost-dev libsqlite3-dev mercurial
+  - echo "Installing requirements for biopython"
+  - sudo apt-get install -qqy clustalw clustalo
+  - sudo apt-get install -qqy muscle mafft probcons wise emboss
+  - sudo apt-get install -qqy samtools bwa
+  - echo "Installing azure client."
+  - sudo apt-get install -qqy npm
 
 # command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
 install:
   - pip install pip --upgrade
+  - travis_retry pip install numpy
+  - travis_retry pip install scipy
   - pip install -r requirements.txt
   - pip install tox
 
