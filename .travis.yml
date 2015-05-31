@@ -4,42 +4,42 @@ python: 2.7
 
 before_install:
   - echo "Update the system."
-  - sudo apt-get update -qqy
+  - sudo apt-get update -qqy &> /dev/null
   - echo "Installing required packages."
-  - sudo apt-get install -qqy git screen vim
-  - sudo apt-get install -qqy build-essential python-dev python-pip
+  - sudo apt-get install -qqy git &> /dev/null
+  - sudo apt-get install -qqy build-essential python-dev &> /dev/null
   - echo "Installing requirements for openssl."
-  - sudo apt-get install -qqy libssl-dev libffi-dev
+  - sudo apt-get install -qqy libssl-dev libffi-dev &> /dev/null
   - echo "Installing requirements for pycurl."
-  - sudo apt-get install -qqy libcurl4-openssl-dev
+  - sudo apt-get install -qqy libcurl4-openssl-dev &> /dev/null
   - echo "Installing requirements for lxml."
-  - sudo apt-get install -qqy libxml2-dev libxslt1-dev
+  - sudo apt-get install -qqy libxml2-dev libxslt1-dev &> /dev/null
   - echo "Installing requirements for matplotlib."
-  - sudo apt-get install -qqy libxft-dev libpng-dev libfreetype6-dev
+  - sudo apt-get install -qqy libxft-dev libpng-dev libfreetype6-dev &> /dev/null
   - echo "Installing requirements for scipy."
-  - sudo apt-get install -qqy liblapack-dev gfortran
-  - sudo apt-get install -qqy libgmp-dev libmpfr-dev
-  - sudo apt-get install -qqy libblas-dev libblas3gf
+  - sudo apt-get install -qqy liblapack-dev gfortran &> /dev/null
+  - sudo apt-get install -qqy libgmp-dev libmpfr-dev &> /dev/null
+  - sudo apt-get install -qqy libblas-dev libblas3gf &> /dev/null
   - echo "Installing requirements for matplotlib"
-  - sudo apt-get install -qqy inkscape libav-tools gdb mencoder dvipng
-  - sudo apt-get install -qqy texlive-fonts-recommended texlive-latex-recommended
-  - sudo apt-get install -qqy graphviz
+  - sudo apt-get install -qqy inkscape libav-tools gdb mencoder dvipng &> /dev/null
+  - sudo apt-get install -qqy texlive-fonts-recommended texlive-latex-recommended &> /dev/null
+  - sudo apt-get install -qqy graphviz &> /dev/null
   - echo "Installing requirements for pysam"
-  - sudo apt-get install -qqy gcc g++ zlib1g-dev libbz2-dev libpng12-dev
-  - sudo apt-get install -qqy libatlas-dev libpq-dev r-base-dev libreadline-dev
-  - sudo apt-get install -qqy libmysqlclient-dev libboost-dev libsqlite3-dev mercurial
+  - sudo apt-get install -qqy gcc g++ zlib1g-dev libbz2-dev libpng12-dev &> /dev/null
+  - sudo apt-get install -qqy libatlas-dev libpq-dev r-base-dev libreadline-dev &> /dev/null
+  - sudo apt-get install -qqy libmysqlclient-dev libboost-dev libsqlite3-dev mercurial &> /dev/null
   - echo "Installing requirements for biopython"
-  - sudo apt-get install -qqy clustalw clustalo
-  - sudo apt-get install -qqy muscle mafft probcons wise emboss
-  - sudo apt-get install -qqy samtools bwa
+  - sudo apt-get install -qqy clustalw clustalo &> /dev/null
+  - sudo apt-get install -qqy muscle mafft probcons wise emboss &> /dev/null
+  - sudo apt-get install -qqy samtools bwa &> /dev/null
   - echo "Installing azure client."
-  - sudo apt-get install -qqy npm
+  - sudo apt-get install -qqy npm &> /dev/null
 
 # command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
 install:
   - pip install pip --upgrade
-  - travis_retry pip install numpy
-  - travis_retry pip install scipy
+  - pip install numpy
+  - pip install scipy -v
   - pip install -r requirements.txt
   - pip install tox
 
