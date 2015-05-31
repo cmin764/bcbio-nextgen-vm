@@ -17,7 +17,14 @@ before_install:
   # Installing requirements for matplotlib.
   - sudo apt-get install -y libxft-dev libpng-dev libfreetype6-dev
   # Installing requirements for scipy.
-  - sudo apt-get install -y libblas-dev liblapack-dev libblas3gf gfortran
+  - sudo apt-get install -y liblapack-dev gfortran
+  - sudo apt-get install -y libgmp-dev libmpfr-dev
+  - sudo apt-get install -y libblas-dev libblas3gf
+  # Installing requirements for matplotlib
+  - sudo apt-get install -y inkscape libav-tools gdb mencoder dvipng
+  - sudo apt-get install -y texlive-latex-base texlive-latex-extra
+  - sudo apt-get install -y texlive-fonts-recommended texlive-latex-recommended
+  - sudo apt-get install -y graphviz
   # Installing azure client.
   - sudo apt-get install -y npm
 
