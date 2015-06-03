@@ -76,6 +76,7 @@ def _upload_biodata(gbuild, target, all_dirs):
     else:
         target_dirs = [x for x in all_dirs if x == target]
     target_dirs = [os.path.join(gbuild, x) for x in target_dirs]
+    # FIXME(alexandrucoman): https://goo.gl/ISgwZb
     bucketname = genome.S3_INFO["bucket"]
     keyname = genome.S3_INFO["key"].format(build=gbuild, target=target)
     conn = boto.connect_s3()
