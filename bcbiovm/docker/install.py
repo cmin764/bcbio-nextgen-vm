@@ -71,8 +71,8 @@ def upgrade_bcbio_vm():
         print("Cannot update bcbio-nextgen-vm; not installed with conda")
     else:
         utils.execute(
-            conda_bin, "install", "--yes",
-            "-c", "https://conda.binstar.org/bcbio", "bcbio-nextgen-vm",
+            [conda_bin, "install", "--yes",
+             "-c", "https://conda.binstar.org/bcbio", "bcbio-nextgen-vm"],
             check_exit_code=0)
 
 
@@ -83,9 +83,8 @@ def pull(args, dockerconf):
     currently smaller with an exported gzipped image.
     """
     print("Retrieving bcbio-nextgen docker image with code and tools")
-    # subprocess.check_call(["docker", "pull", image])
     assert args.image, "Unspecified image name for docker import"
-    utils.execute("docker", "import", dockerconf["image_url"], args.image,
+    utils.execute(["docker", "import", dockerconf["image_url"], args.image],
                   check_exit_code=0)
 
 
@@ -149,7 +148,7 @@ def add_install_defaults(args):
 def _check_docker_image(args):
     """Ensure docker image exists.
     """
-    output, _ = utils.execute("docker", "images", check_exit_code=0)
+    output, _ = utils.execute(["docker", "images"], check_exit_code=0)
     for image in output.splitlines():
         parts = image.split()
         if len(parts) > 1 and parts[0] == args.image:
