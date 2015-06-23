@@ -11,7 +11,7 @@ from bcbiovm.docker import devel as docker_devel
 from bcbiovm.docker import install as docker_install
 from bcbiovm.docker import manage as docker_manage
 from bcbiovm.docker import run as docker_run
-from bcbiovm.ship import pack as ship_pack
+from bcbiovm.provider.aws import ship
 
 
 def _install_or_upgrade(main_parser, callback, install=True):
@@ -257,7 +257,9 @@ class RunFunction(base.BaseCommand):
         with open(out_file, "w") as out_handle:
             yaml.safe_dump(out, out_handle, default_flow_style=False,
                            allow_unicode=False)
-        ship_pack.send_output(parallel["pack"], out_file)
+        # FIXME(alexandrucoman): Taking cloud provider into consideration
+        s3pack = ship.S3Pack()
+        s3pack.send_output(parallel["pack"], out_file)
 
 
 class Install(base.BaseCommand):
