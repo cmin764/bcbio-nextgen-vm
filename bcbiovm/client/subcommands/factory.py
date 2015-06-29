@@ -1,5 +1,6 @@
 """Sub-commands factory."""
 from bcbiovm.client.subcommands import aws
+from bcbiovm.client.subcommands import azure
 from bcbiovm.client.subcommands import cluster
 from bcbiovm.client.subcommands import config
 from bcbiovm.client.subcommands import docker
@@ -14,6 +15,9 @@ _SUBCOMMANDS = {
         'IAMBootstrap': aws.IAMBootstrap,
         'VPCBoostrap': aws.VPCBoostrap,
     },
+    'azure': {
+        'PrepareEnvironment': azure.PrepareEnvironment,
+    },
     'cluster': {
         'Bootstrap': cluster.Bootstrap,
         'Command': cluster.Command,
@@ -24,6 +28,7 @@ _SUBCOMMANDS = {
     },
     'config': {
         'EditAWS': config.EditAWS,
+        'EditAzure': config.EditAzure,
     },
     'docker': {
         'BiodataUpload': docker.BiodataUpload,

@@ -14,6 +14,26 @@ from bcbiovm.common import constant
 from bcbiovm.provider import factory as cloud_factory
 
 
+class _Config(base.BaseCommand):
+
+    """Manipulate elasticluster configuration files, providing easy
+    ways to edit in place.
+    """
+
+    def setup(self):
+        """Extend the parser configuration in order to expose this command."""
+        parser = self._main_parser.add_parser(
+            "config",
+            help="Define configuration details for running a cluster")
+        actions = parser.add_subparsers(
+            title="[configuration specific actions]")
+        self._register_parser("actions", actions)
+
+    def process(self):
+        """Run the command with the received information."""
+        pass
+
+
 class Graph(base.BaseCommand):
 
     """
@@ -147,7 +167,7 @@ class ElastiCluster(base.BaseCommand):
         pass
 
 
-class ConfigAWS(base.BaseCommand):
+class ConfigAWS(_Config):
 
     """Manipulate elasticluster configuration files, providing easy
     ways to edit in place.
@@ -157,18 +177,16 @@ class ConfigAWS(base.BaseCommand):
         (command_factory.get("config", "EditAWS"), "actions"),
     ]
 
-    def setup(self):
-        """Extend the parser configuration in order to expose this command."""
-        parser = self._main_parser.add_parser(
-            "config",
-            help="Define configuration details for running a cluster")
-        actions = parser.add_subparsers(
-            title="[configuration specific actions]")
-        self._register_parser("actions", actions)
 
-    def process(self):
-        """Run the command with the received information."""
-        pass
+class ConfigAzure(_Config):
+
+    """Manipulate elasticluster configuration files, providing easy
+    ways to edit in place.
+    """
+
+    sub_commands = [
+        (command_factory.get("config", "EditAzure"), "actions"),
+    ]
 
 
 class ICELCommand(base.BaseCommand):
@@ -218,6 +236,30 @@ class AWSProvider(base.BaseCommand):
             "aws",
             help="Automate resources for running bcbio on AWS")
         actions = parser.add_subparsers(title="[aws commands]")
+        self._register_parser("actions", actions)
+
+    def process(self):
+        """Run the command with the received information."""
+        pass
+
+
+class AzureProvider(base.BaseCommand):
+
+    """Automate resources for running bcbio on Azure."""
+    sub_commands = [
+        (ElastiCluster, "actions"),
+        (ConfigAzure, "actions"),
+        # TODO(alexandrucoman): Add `info` command
+        (Graph, "actions"),
+        (command_factory.get("azure", "PrepareEnvironment"), "actions")
+    ]
+
+    def setup(self):
+        """Extend the parser configuration in order to expose this command."""
+        parser = self._main_parser.add_parser(
+            "azure",
+            help="Automate resources for running bcbio on Azure")
+        actions = parser.add_subparsers(title="[azure commands]")
         self._register_parser("actions", actions)
 
     def process(self):
